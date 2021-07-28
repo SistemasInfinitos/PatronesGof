@@ -1,5 +1,4 @@
 using System;
-
 namespace PatronesGof
 {
     public class WeatherForecast
