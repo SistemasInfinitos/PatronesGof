@@ -17,9 +17,9 @@ namespace PatronesGof.DeCreacion.AbstractFactory
     // con productos de otro.
     public interface IAbstractFactory
     {
-        IAbstractProductA CreateProductA();
+        IDisciplina CreateProductA();
 
-        IAbstractProductB CreateProductB();
+        IIngenieria CreateProductB();
     }
 
     // Las fábricas concreta producen una familia de productos que pertenecen a un solo
@@ -28,14 +28,14 @@ namespace PatronesGof.DeCreacion.AbstractFactory
     // producto, mientras que dentro del método se instancia un producto concreto
     class ConcreteFactory1 : IAbstractFactory
     {
-        public IAbstractProductA CreateProductA()
+        public IDisciplina CreateProductA()
         {
-            return new ConcreteProductA1();
+            return new Ingenieria();
         }
 
-        public IAbstractProductB CreateProductB()
+        public IIngenieria CreateProductB()
         {
-            return new ConcreteProductB1();
+            return new IngenieriaDeSoftware();
         }
     }
 
@@ -43,26 +43,26 @@ namespace PatronesGof.DeCreacion.AbstractFactory
 
     class ConcreteFactory2 : IAbstractFactory
     {
-        public IAbstractProductA CreateProductA()
+        public IDisciplina CreateProductA()
         {
-            return new ConcreteProductA2();
+            return new Humanidades();
         }
 
-        public IAbstractProductB CreateProductB()
+        public IIngenieria CreateProductB()
         {
-            return new ConcreteProductB2();
+            return new IngenieriaIndustrial();
         }
     }
 
     // Cada producto distinto de una familia de productos debe tener una interfaz básica.
     // Todas las variantes del producto deben implementar esta interfaz.
-    public interface IAbstractProductA
+    public interface IDisciplina
     {
         string UsefulFunctionA();
     }
 
 // Los productos Concretos son creados por las correspondientes fábricas concretas.
-    class ConcreteProductA1 : IAbstractProductA
+    class Ingenieria : IDisciplina
     {
         public string UsefulFunctionA()
         {
@@ -70,18 +70,32 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         }
     }
 
-    class ConcreteProductA2 : IAbstractProductA
+    class Humanidades : IDisciplina
     {
         public string UsefulFunctionA()
         {
             return "El resultado del producto A2.";
+        }
+    }  
+    class Ciencias : IDisciplina
+    {
+        public string UsefulFunctionA()
+        {
+            return "El resultado del producto A3.";
+        }
+    } 
+    class Medicina : IDisciplina
+    {
+        public string UsefulFunctionA()
+        {
+            return "El resultado del producto A4.";
         }
     }
 
     // Aquí está la interfaz base de otro producto. Todos los productos pueden
     // interactuar entre sí, pero la interacción adecuada solo es posible entre
     // productos de la misma variante concreta.
-    public interface IAbstractProductB
+    public interface IIngenieria
     {
         // El producto B puede hacer sus propias cosas ...
         string UsefulFunctionB();
@@ -90,11 +104,11 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         // 
         // la Abstract Factory se asegura de que todos los productos que crea sean 
         // de la misma variante y, por lo tanto, compatibles.
-        string AnotherUsefulFunctionB(IAbstractProductA collaborator);
+        string AnotherUsefulFunctionB(IDisciplina collaborator);
     }
 
     // Los productos concreotos son creados por las correspondientes fábricas.
-    class ConcreteProductB1 : IAbstractProductB
+    class IngenieriaDeSoftware : IIngenieria
     {
         public string UsefulFunctionB()
         {
@@ -104,7 +118,7 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         // La variante, Producto B1, solo puede funcionar correctamente con el
         // variante, Producto A1. No obstante, acepta cualquier instancia de
         // AbstractProductA como argumento.
-        public string AnotherUsefulFunctionB(IAbstractProductA collaborator)
+        public string AnotherUsefulFunctionB(IDisciplina collaborator)
         {
             var result = collaborator.UsefulFunctionA();
 
@@ -112,7 +126,7 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         }
     }
 
-    class ConcreteProductB2 : IAbstractProductB
+    class IngenieriaIndustrial : IIngenieria
     {
         public string UsefulFunctionB()
         {
@@ -122,7 +136,7 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         // La variante, Producto B2, solo puede funcionar correctamente con el
         // variante, Producto A2. No obstante, acepta cualquier instancia de
         // AbstractProductA como argumento.
-        public string AnotherUsefulFunctionB(IAbstractProductA collaborator)
+        public string AnotherUsefulFunctionB(IDisciplina collaborator)
         {
             var result = collaborator.UsefulFunctionA();
 
