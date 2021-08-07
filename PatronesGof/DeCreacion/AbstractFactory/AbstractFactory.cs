@@ -93,7 +93,7 @@ namespace PatronesGof.DeCreacion.AbstractFactory
         string AnotherUsefulFunctionB(IAbstractProductA collaborator);
     }
 
-    // Los productos concreotos son creados por las correspondientes fábricas concretas.
+    // Los productos concreotos son creados por las correspondientes fábricas.
     class ConcreteProductB1 : IAbstractProductB
     {
         public string UsefulFunctionB()
